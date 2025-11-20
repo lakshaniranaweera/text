@@ -2,160 +2,142 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Mini Game — Mobile Friendly</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Mini Game — Auto Fit</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-/* ---------- PAGE BACKGROUNDS ---------- */
+/* ======== AUTO SCALE WRAPPER FOR 800×1340 DESIGN ======== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+#scaleWrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 800px;
+  height: 1340px;
+  transform-origin: top left;
+}
+
+/* ======== PAGE BASE ======== */
+.app-page {
+  width: 800px;
+  height: 1340px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.app-page.active {
+  display: flex;
+}
+
+/* ======== BACKGROUNDS ======== */
 #page1 {
-  background: url('back1.png') no-repeat center center/cover;
+  background: url('back3.png') center/cover no-repeat;
 }
 #page3 {
-  background: url('back2.png') no-repeat center center/cover;
+  background: url('back2.png') center/cover no-repeat;
 }
 #winner {
-  background: url('back1.png') no-repeat center center/cover;
+  background: url('back1.png') center/cover no-repeat;
 }
 
-.app-page {
-  display:none;
-  height:100vh;
-  width:100vw;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  text-align:center;
-  background-size: cover !important;
-  background-position: center !important;
-}
-
-.app-page.active{
-  display:flex;
-}
-
-/* REMOVE ANY COLOR BACKGROUNDS */
-html,body{
-  height:100%;
-  margin:0;
-  padding:0;
-  background: transparent !important;
-  color:#fff;
-  font-family: system-ui;
-}
-
-@font-face {
-  font-family: 'Verlag Bold';
-  src: url('Verlag-Bold.ttf') format('truetype');
+/* ======== PAGE 1 ======== */
+#page1 p {
+  font-size: 60px;
+  padding: 20px;
+  color: #fff;
   font-weight: bold;
 }
 
-body, button, h1, h4, p, div, span {
-  font-family: 'calibri' !important;
-  text-transform: uppercase;
-}
-
-/* PAGE 1 */
-#page1 p{
-  font-size:100px;
-  padding:20px;
-}
-
-/* PAGE 3 */
-#page3 {
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding-top: 0px;
-  text-align:center;
-}
-
+/* ======== QUESTIONS ======== */
 #questionText {
-  color:#103167;
-  font-size:70px;
-  line-height:1.3;
-  margin-bottom:25px;
-  margin-top: 0 !important;
+  color: #103167;
+  font-size: 52px;
+  line-height: 1.2;
+  margin-bottom: 35px;
+  width: 90%;
+  font-weight: bold;
 }
 
-#answersGrid{
-  display:grid;
+/* ANSWER GRID */
+#answersGrid {
+  display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap:20px;
-  width:90%;
-  max-width:900px;
-  margin:auto;
-  margin-bottom:25px;
-  margin-top:0 !important;
+  gap: 20px;
+  width: 90%;
+  margin-top: 10px;
 }
 
 .answer-btn {
   border: none;
-  border-radius: 30px;
-  width: 100%;
-  height: 260px;
-  font-size: 48px;
-  background: white;
+  border-radius: 28px;
+  height: 200px;
+  font-size: 27px;
+  background: #fff;
   color: #103167;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.2s ease;
-  text-align:center;
-  line-height: 1.0;
-  padding: 0 20px;
+  font-weight: bold;
+  padding: 10px;
 }
 
-.answer-btn.selected{
-  box-shadow:0 0 14px #d1c9f5;
-  transform:scale(1.05);
+.answer-btn.selected {
+  box-shadow: 0 0 18px #d1c9f5;
+  transform: scale(1.05);
 }
 
-#nextBtn{
-  width:40%;
-  height:110px;
-  font-size:58px;
-  border-radius:12px;
-  background:#103167;
-  color:white;
-  border:none;
-  position:fixed;
-  bottom:400px;
-  left:50%;
-  transform:translateX(-50%);
-  display:block !important;
-  z-index:999;
+/* NEXT BUTTON */
+#nextBtn {
+  width: 60%;
+  height: 120px;
+  font-size: 50px;
+  border-radius: 20px;
+  background: #103167;
+  color: white;
+  border: none;
+  margin-top: 30px;
+  font-weight: bold;
 }
 
-/* WINNER PAGE */
-#winner img{
-  width:500px;
-  height:500px;
-  border-radius:22px;
-  margin-top:20px;
-  animation:zoomPulse 2s infinite ease-in-out;
+/* ======== WINNER PAGE ======== */
+#winner img {
+  width: 450px;
+  height: 450px;
+  border-radius: 22px;
+  animation: zoomPulse 2s infinite ease-in-out;
 }
 
-@keyframes zoomPulse{
-  0%{ transform:scale(1.2); }
-  50%{ transform:scale(1); }
-  100%{ transform:scale(1.2); }
+@keyframes zoomPulse {
+  0% { transform: scale(1.15); }
+  50% { transform: scale(1); }
+  100% { transform: scale(1.15); }
 }
 
-#winner h1{
-  color:#103167;
-  font-size:70px;
-  margin-top:100px;
+#winner h1 {
+  color: #103167;
+  font-size: 60px;
+  margin-top: 40px;
+  font-weight: bold;
 }
-#winner p{
-  color:#103167;
-  font-size:50px;
-  margin-top:10px;
+
+#winner p {
+  color: #103167;
+  font-size: 45px;
+  margin-top: 10px;
 }
 </style>
 </head>
 
 <body>
+<div id="scaleWrap">
 
 <!-- PAGE 1 -->
 <div id="page1" class="app-page active">
@@ -177,8 +159,27 @@ body, button, h1, h4, p, div, span {
   <p id="winnerSub"></p>
 </div>
 
+</div> <!-- scaleWrap end -->
+
 <script>
-// ELEMENT REFERENCES
+/* ========== AUTO SCALE FOR ANY SCREEN (PORTRAIT + LANDSCAPE) ========== */
+function scaleGame() {
+  const designW = 800;
+  const designH = 1340;
+
+  const sw = window.innerWidth / designW;
+  const sh = window.innerHeight / designH;
+
+  const scale = Math.min(sw, sh);
+
+  const wrap = document.getElementById("scaleWrap");
+  wrap.style.transform = `translate(-50%, -50%) scale(${scale})`;
+}
+
+window.onload = scaleGame;
+window.onresize = scaleGame;
+
+/* ========== GAME LOGIC ========== */
 const page1 = document.getElementById("page1");
 const page3 = document.getElementById("page3");
 const winner = document.getElementById("winner");
@@ -188,35 +189,33 @@ const answersGrid = document.getElementById("answersGrid");
 const nextBtn = document.getElementById("nextBtn");
 const winnerSub = document.getElementById("winnerSub");
 
-// QUESTIONS
 const questions = [
   { id:1, text:"When your friends want to make plans, what’s your role?", answers:[
       {id:'a', label:'I’m the planner—time, place, reminders? All me! 📋 '},
       {id:'b', label:'Chaos, Fun & Life of the party! 🤪'},
       {id:'c', label:'I show up looking fabulous & fashionably late 💅 '},
       {id:'d', label:'Here for the vibe!😎 '}
-    ]},
+  ]},
   { id:2, text:"What’s your go to TV series", answers:[
       {id:'a', label:'Friends ☕'},
       {id:'b', label:'Stranger Things 🧇'},
       {id:'c', label:'Emily in Paris 🗼'},
       {id:'d', label:'Suits 👔'}
-    ]},
+  ]},
   { id:3, text:"The Ultimate go-to junk food", answers:[
       {id:'a', label:'Pizza 🍕'},
       {id:'b', label:'Burger & Fries 🍔'},
       {id:'c', label:'Donuts 🥯'},
       {id:'d', label:'Ice Cream 🍦'}
-    ]},
+  ]},
   { id:4, text:"What’s your weekend vibe?", answers:[
       {id:'gold',   label:'Errands 🛒'},
       {id:'silver', label:'Movies & Chill🎥'},
       {id:'bronze', label:'Shopping & Brunch🛍️'},
       {id:'mystery',label:'Adventures & Outdoors 🧗‍♀️'}
-    ]}
+  ]}
 ];
 
-// RESULT IMAGES
 const winnerImages = {
   gold:'1.png',
   silver:'2.png',
@@ -224,13 +223,11 @@ const winnerImages = {
   mystery:'4.png'
 };
 
-// PAGE HANDLER
 function show(p){
   [page1,page3,winner].forEach(x=>x.classList.remove('active'));
   p.classList.add('active');
 }
 
-// START GAME
 tapArea.onclick = ()=>{
   currentIndex = 0;
   answersSelected = {};
@@ -238,7 +235,6 @@ tapArea.onclick = ()=>{
   show(page3);
 };
 
-// GAME LOGIC
 let currentIndex = 0;
 let answersSelected = {};
 
@@ -276,7 +272,6 @@ function renderQuestion(i){
   };
 }
 
-// FINAL PAGE
 function finishGame(){
   const answerToWinner = {
     a: 'gold',
@@ -308,5 +303,3 @@ function finishGame(){
 
 </body>
 </html>
-
-
