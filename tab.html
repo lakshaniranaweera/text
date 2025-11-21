@@ -7,11 +7,11 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-  * {
+* {
   font-family: Calibri, Arial, sans-serif !important;
   text-transform: uppercase !important;
 }
-/* ======== AUTO SCALE WRAPPER FOR 800×1340 DESIGN ======== */
+
 html, body {
   margin: 0;
   padding: 0;
@@ -29,7 +29,6 @@ html, body {
   transform-origin: top left;
 }
 
-/* ======== PAGE BASE ======== */
 .app-page {
   width: 800px;
   height: 1340px;
@@ -44,7 +43,6 @@ html, body {
   display: flex;
 }
 
-/* ======== BACKGROUNDS ======== */
 #page1 {
   background: url('back3.png') center/cover no-repeat;
 }
@@ -55,28 +53,24 @@ html, body {
   background: url('back1.png') center/cover no-repeat;
 }
 
-/* ======== PAGE 1 ======== */
 #page1 p {
-  font-size: 60px;
+  font-size: 70px;
   padding: 20px;
-  color: #fff;
+  color: #103167;
   font-weight: bold;
 }
 
-/* ======== QUESTIONS ======== */
 #questionText {
   color: #103167;
-  font-size: 52px;
   line-height: 1.2;
   margin-bottom: 35px;
   width: 90%;
   font-weight: bold;
 }
 
-/* ANSWER GRID */
 #answersGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   width: 90%;
   margin-top: 10px;
@@ -86,7 +80,7 @@ html, body {
   border: none;
   border-radius: 28px;
   height: 200px;
-  font-size: 27px;
+  width: 100%;
   background: #fff;
   color: #103167;
   font-weight: bold;
@@ -98,9 +92,8 @@ html, body {
   transform: scale(1.05);
 }
 
-/* NEXT BUTTON */
 #nextBtn {
-  width: 60%;
+  width: 40%;
   height: 120px;
   font-size: 50px;
   border-radius: 20px;
@@ -111,10 +104,9 @@ html, body {
   font-weight: bold;
 }
 
-/* ======== WINNER PAGE ======== */
 #winner img {
-  width: 350px;
-  height: 350px;
+  width: 450px;
+  height: 450px;
   border-radius: 22px;
   animation: zoomPulse 2s infinite ease-in-out;
 }
@@ -136,6 +128,7 @@ html, body {
   color: #103167;
   font-size: 45px;
   margin-top: 10px;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -163,19 +156,15 @@ html, body {
   <p id="winnerSub"></p>
 </div>
 
-</div> <!-- scaleWrap end -->
+</div>
 
 <script>
-/* ========== AUTO SCALE FOR ANY SCREEN (PORTRAIT + LANDSCAPE) ========== */
 function scaleGame() {
   const designW = 800;
   const designH = 1340;
-
   const sw = window.innerWidth / designW;
   const sh = window.innerHeight / designH;
-
   const scale = Math.min(sw, sh);
-
   const wrap = document.getElementById("scaleWrap");
   wrap.style.transform = `translate(-50%, -50%) scale(${scale})`;
 }
@@ -183,7 +172,6 @@ function scaleGame() {
 window.onload = scaleGame;
 window.onresize = scaleGame;
 
-/* ========== GAME LOGIC ========== */
 const page1 = document.getElementById("page1");
 const page3 = document.getElementById("page3");
 const winner = document.getElementById("winner");
@@ -194,28 +182,26 @@ const nextBtn = document.getElementById("nextBtn");
 const winnerSub = document.getElementById("winnerSub");
 
 const questions = [
-  { id:1, text:"When your friends want to make plans, what’s your role?", answers:[
-      {id:'a', label:'I’m the planner—time, place, reminders? All me! 📋 '},
-      {id:'b', label:'Chaos, Fun & Life of the party! 🤪'},
-      {id:'c', label:'I show up looking fabulous & fashionably late 💅 '},
+  { id:1, text:"When your friends want to make plans, what’s your role?", fontSize:"48px", answerFontSize:"30px", answers:[
+      {id:'a', label:'I’m the planner-\nTime, place,reminders? \nAll me! 📋 '},
+      {id:'b', label:'Chaos, Fun &\nLife of the party! 🤪'},
+      {id:'c', label:'I show up looking fabulous\n& fashionably late 💅 '},
       {id:'d', label:'Here for the vibe!😎 '}
   ]},
-  { id:2, text:"What’s your go to TV series", answers:[
-      {id:'a', label:'Friends ☕'},
-      {id:'b', label:'Stranger Things 🧇'},
-      {id:'c', label:'Emily in Paris 🗼'},
-      {id:'d', label:'Suits 👔'}
+  { id:2, text:"I like my hair ", fontSize:"50px", answerFontSize:"40px", answers:[
+      {id:'a', label:'Short 🧑‍🦰'},
+      {id:'b', label:'Long 👩‍🦰'}
   ]},
-  { id:3, text:"The Ultimate go-to junk food", answers:[
+  { id:3, text:"The Ultimate go-to junk food", fontSize:"52px", answerFontSize:"35px", answers:[
       {id:'a', label:'Pizza 🍕'},
-      {id:'b', label:'Burger & Fries 🍔'},
+      {id:'b', label:'Burger &\nFries 🍔'},
       {id:'c', label:'Donuts 🥯'},
       {id:'d', label:'Ice Cream 🍦'}
   ]},
-  { id:4, text:"What’s your weekend vibe?", answers:[
+  { id:4, text:"What’s your weekend vibe?", fontSize:"55px", answerFontSize:"35px", answers:[
       {id:'gold',   label:'Errands 🛒'},
-      {id:'silver', label:'Movies & Chill🎥'},
-      {id:'bronze', label:'Shopping & Brunch🛍️'},
+      {id:'silver', label:'Movies & Chill 🎥'},
+      {id:'bronze', label:'Shopping & Brunch 🛍️'},
       {id:'mystery',label:'Adventures & Outdoors 🧗‍♀️'}
   ]}
 ];
@@ -244,21 +230,21 @@ let answersSelected = {};
 
 function renderQuestion(i){
   const q = questions[i];
-  questionText.textContent = q.text;
-  answersGrid.innerHTML = "";
+  questionText.innerHTML = q.text.replace(/\n/g, "<br>");
+  questionText.style.fontSize = q.fontSize;
 
+  answersGrid.innerHTML = "";
   q.answers.forEach(ans=>{
     const btn = document.createElement("button");
     btn.className = "answer-btn";
-    btn.textContent = ans.label;
-
+    btn.innerHTML = ans.label.replace(/\n/g, "<br>");
+    btn.style.fontSize = q.answerFontSize;
     btn.onclick = ()=>{
       [...answersGrid.children].forEach(x=>x.classList.remove("selected"));
       btn.classList.add("selected");
       answersSelected[q.id] = ans.id;
       nextBtn.textContent = (i === questions.length - 1 ? "Finish" : "Next");
     };
-
     answersGrid.appendChild(btn);
   });
 
@@ -277,35 +263,23 @@ function renderQuestion(i){
 }
 
 function finishGame(){
-  const answerToWinner = {
-    a: 'gold',
-    b: 'silver',
-    c: 'bronze',
-    d: 'mystery'
-  };
-
+  const answerToWinner = { a: 'gold', b: 'silver', c: 'bronze', d: 'mystery' };
   const choiceKey = answersSelected[1] ? answerToWinner[answersSelected[1]] : "mystery";
-
   winnerImage.src = winnerImages[choiceKey];
 
   const giftMap = {
-    gold:{title:"Madam Responsible", desc:"Bossy planner who keeps everyone in line"},
-    silver:{title:"Chaos Queen", desc:"Drama magnet with dog-mom energy"},
-    bronze:{title:"Buttercup Babe", desc:"Stylish main character who lives for gossip"},
-    mystery:{title:"Miss Vibes", desc:"“No stress, just vibes” friend always down for whatever"}
+    gold: { title: "YOU ARE,\nMADAM RESPONSIBLE", desc: "BOSSY PLANNER\nWHO KEEPS EVERYONE IN LINE " },
+    silver: { title: "YOU ARE,\nCHAOS QUEEN", desc: "DRAMA MAGNET WITH \nDOG-MOM ENERGY " },
+    bronze: { title: "YOU ARE,\nBUTTERCUP BABE", desc: "STYLISH MAIN CHARACTER \nWHO LIVES FOR GOSSIP" },
+    mystery: { title: "YOU ARE,\nMISS VIBES", desc: "“NO STRESS, JUST VIBES” \nFRIEND WHO’S ALWAYS DOWN FOR WHATEVER" }
   };
 
   const result = giftMap[choiceKey] || giftMap.mystery;
-  document.querySelector("#winner h1").textContent = result.title;
-  winnerSub.textContent = result.desc;
-
+  document.querySelector("#winner h1").innerHTML = result.title.replace(/\n/g, "<br>");
+  winnerSub.innerHTML = result.desc.replace(/\n/g, "<br>");
   show(winner);
-
   setTimeout(()=>show(page1), 7000);
 }
 </script>
-
 </body>
 </html>
-
-
